@@ -18,6 +18,7 @@ let questions = [
   "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ",
   "What is the minimum crew size for the ISS? "
 ];
+
 let correctAnswers = [
   "Sally Ride",
   "true",
@@ -25,8 +26,8 @@ let correctAnswers = [
   "Trajectory",
   "3"
 ];
-let candidateAnswers = [];
 
+let candidateAnswers = [];
 
 function askForName() {
   // TODO 1.1b: Ask for candidate's name //
@@ -44,17 +45,36 @@ function askQuestion() {
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-
   console.log(`\nCandidate Name: ${candidateName}`);
   for (let i = 0; i < candidateAnswers.length; i++) {
     console.log(`${[i + 1]}) ${questions[i]}`)
     console.log(`Your Answer: ${candidateAnswers[i]}`);
     console.log(`Correct Answer: ${correctAnswers[i]} \n`)
   }
-  console.log();
+  // console.log();
 
-  let grade;  //TODO 3.2 use this variable to calculate the candidates score.
+  let numCorrectAnswers = [];
+  let numQuizQuestions = questions;
 
+  for (let i = 0; i < numQuizQuestions.length; i++) {
+    if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
+      numCorrectAnswers.push(candidateAnswers[i])
+    }
+  }
+
+  let grade = (numCorrectAnswers.length) / (numQuizQuestions.length) * 100;  //TODO 3.2 use this variable to calculate the candidates score.
+
+  let result = "";
+  if (grade === 100) {
+    result = "PASSED";
+  } else if (grade === 80) {
+    result = "PASSED";
+  } else {
+    result = "FAILED";
+  }
+
+  console.log(`>>> Overall Grade: ${grade}% (${numCorrectAnswers.length} of ${numQuizQuestions.length} responses correct) <<<`);
+  console.log(`>>> Status: ${result} <<<`)
 
   return grade;
 }
